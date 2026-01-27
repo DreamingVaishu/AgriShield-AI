@@ -4,7 +4,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import * as tf from '@tensorflow/tfjs';
-import '@tensorflow/tfjs-react-native';
 
 import CameraScreen from './screens/CameraScreen';
 import ResultScreen from './screens/ResultScreen';
