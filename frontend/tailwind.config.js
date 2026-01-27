@@ -8,15 +8,17 @@ export default {
         extend: {
             colors: {
                 nature: {
-                    900: '#1a3a2e', // Deep forest green (bg)
-                    800: '#163328', // Slightly lighter
-                    700: '#2d5a4c', // Card bg
+                    950: '#0f291e', // Darker background
+                    900: '#1a3a2e',
+                    800: '#163328',
+                    700: '#2d5a4c',
                     600: '#38725f',
                     500: '#438e75',
-                    400: '#4ade80', // Action green (buttons)
-                    300: '#6ee7b7',
-                    200: '#a7f3d0',
-                    100: '#d1fae5',
+                    400: '#4ade80', // Vibrant Action
+                    300: '#86efac',
+                    200: '#bbf7d0',
+                    100: '#dcfce7',
+                    50: '#f0fdf4',
                 }
             }
         },

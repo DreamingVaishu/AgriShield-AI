@@ -4,14 +4,70 @@
 
 @layer utilities {
   .glass-dark {
-    @apply bg-nature-900/90 backdrop-blur-md border border-nature-400/20 shadow-xl;
+    @apply bg-black/40 backdrop-blur-xl border border-white/10 shadow-xl;
   }
-  
+
   .glass-card {
-    @apply bg-nature-900/60 backdrop-blur-sm border border-nature-400/10 shadow-lg hover:border-nature-400/30 transition-all duration-300;
+    @apply bg-nature-900/60 backdrop-blur-md border border-nature-400/20 shadow-lg hover:border-nature-400/40 hover:bg-nature-900/70 transition-all duration-300;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px rgba(74, 222, 128, 0.5);
   }
 }
 
 body {
-  @apply bg-nature-900 text-white antialiased;
+  @apply bg-nature-950 text-white antialiased font-sans selection:bg-nature-500/30;
+}
+
+/* Animations */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(74, 222, 128, 0);
+  }
+
+  100% {
+    transform: scale(0.8);
+    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2s infinite;
 }

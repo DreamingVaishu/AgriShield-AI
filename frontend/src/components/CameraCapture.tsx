@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import { Camera, Upload, Leaf, Loader2 } from 'lucide-react';
+import { Camera, Upload, Leaf, ScanLine, Shield } from 'lucide-react';
 import { classifyImage } from '../services/classifier';
 
 interface CameraCaptureProps {
@@ -110,7 +110,18 @@ export function CameraCapture({ onCapture, onError }: CameraCaptureProps) {
     };
 
     return (
-        <div className="relative h-full flex flex-col bg-nature-900">
+        <div className="relative h-full flex flex-col bg-nature-950 overflow-hidden">
+            {/* Header Overlay */}
+            <div className="absolute top-0 left-0 right-0 z-20 pt-safe-top pb-6 bg-gradient-to-b from-black/80 to-transparent">
+                <div className="px-6 flex items-center gap-2">
+                    <Shield className="text-nature-400 fill-nature-400/20" size={28} />
+                    <div>
+                        <h1 className="text-xl font-bold tracking-tight">AgriShield</h1>
+                        <p className="text-xs text-nature-300 font-medium tracking-wide uppercase">AI Plant Defense</p>
+                    </div>
+                </div>
+            </div>
+
             {/* Camera View */}
             <div className="flex-1 relative overflow-hidden">
                 <video
@@ -121,44 +132,52 @@ export function CameraCapture({ onCapture, onError }: CameraCaptureProps) {
                 />
 
                 {/* Overlay Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-b from-nature-900/40 via-transparent to-nature-900/90 pointer-events-none" />
+                <div className="absolute inset-0 bg-nature-950/30 pointer-events-none" />
 
                 {/* Hidden Canvas for processing */}
                 <canvas ref={canvasRef} className="hidden" />
 
-                {/* Scanning UI Overlay */}
-                <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center">
-                    <div className="w-64 h-64 border-2 border-nature-400/50 rounded-3xl relative">
-                        <div className="absolute top-0 left-0 w-6 h-6 border-t-4 border-l-4 border-nature-400 -mt-1 -ml-1 rounded-tl-xl" />
-                        <div className="absolute top-0 right-0 w-6 h-6 border-t-4 border-r-4 border-nature-400 -mt-1 -mr-1 rounded-tr-xl" />
-                        <div className="absolute bottom-0 left-0 w-6 h-6 border-b-4 border-l-4 border-nature-400 -mb-1 -ml-1 rounded-bl-xl" />
-                        <div className="absolute bottom-0 right-0 w-6 h-6 border-b-4 border-r-4 border-nature-400 -mb-1 -mr-1 rounded-br-xl" />
+                {/* Scanning Frame */}
+                <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center -mt-12">
+                    <div className="relative w-72 h-72">
+                        {/* Corner markers */}
+                        <div className="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-nature-400 rounded-tl-2xl shadow-[0_0_15px_rgba(74,222,128,0.5)]" />
+                        <div className="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-nature-400 rounded-tr-2xl shadow-[0_0_15px_rgba(74,222,128,0.5)]" />
+                        <div className="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-nature-400 rounded-bl-2xl shadow-[0_0_15px_rgba(74,222,128,0.5)]" />
+                        <div className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-nature-400 rounded-br-2xl shadow-[0_0_15px_rgba(74,222,128,0.5)]" />
+
+                        {/* Scanner Line Animation */}
+                        <div className="absolute inset-x-0 h-0.5 bg-nature-400/80 shadow-[0_0_20px_rgba(74,222,128,1)] animate-[scan_2s_ease-in-out_infinite]" style={{ top: '50%' }} />
 
                         {isProcessing && (
-                            <div className="absolute inset-0 flex items-center justify-center bg-nature-900/50 backdrop-blur-sm rounded-2xl">
-                                <Loader2 className="w-12 h-12 text-nature-400 animate-spin" />
+                            <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 backdrop-blur-md rounded-3xl animate-fade-in">
+                                <ScanLine className="w-16 h-16 text-nature-400 animate-pulse-ring" />
+                                <p className="mt-4 text-nature-200 font-bold tracking-wider animate-pulse">ANALYZING...</p>
                             </div>
                         )}
                     </div>
-                    <p className="mt-4 text-nature-200 font-medium text-lg drop-shadow-md">
-                        {isProcessing ? 'Analyzing plant...' : 'Align plant in frame'}
-                    </p>
+
+                    {!isProcessing && (
+                        <p className="mt-8 text-white/90 font-medium text-sm bg-black/40 px-4 py-2 rounded-full backdrop-blur-md border border-white/10">
+                            Align plant within frame
+                        </p>
+                    )}
                 </div>
             </div>
 
             {/* Controls */}
-            <div className="bg-nature-900/95 backdrop-blur-md p-6 pb-12 rounded-t-3xl border-t border-nature-700 -mt-6 z-10">
-                <div className="flex items-center justify-center gap-8">
+            <div className="bg-nature-950/80 backdrop-blur-xl pb-safe-bottom pt-8 px-6 rounded-t-[2.5rem] border-t border-white/5 relative z-10 -mt-6 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+                <div className="flex items-center justify-between max-w-sm mx-auto">
                     {/* Upload Button */}
                     <button
                         onClick={() => fileInputRef.current?.click()}
-                        className="flex flex-col items-center gap-2 text-nature-200 hover:text-nature-400 transition-colors"
+                        className="flex flex-col items-center gap-2 group"
                         disabled={isProcessing}
                     >
-                        <div className="w-12 h-12 rounded-full bg-nature-800 border border-nature-600 flex items-center justify-center">
-                            <Upload size={24} />
+                        <div className="w-14 h-14 rounded-2xl bg-nature-900/80 border border-nature-700/50 flex items-center justify-center group-active:scale-95 transition-all duration-200 hover:bg-nature-800 hover:border-nature-500/50">
+                            <Upload size={24} className="text-nature-200 group-hover:text-nature-100" />
                         </div>
-                        <span className="text-sm font-medium">Upload</span>
+                        <span className="text-xs font-medium text-nature-400/60 group-hover:text-nature-300 transition-colors">Upload</span>
                     </button>
                     <input
                         type="file"
@@ -172,26 +191,36 @@ export function CameraCapture({ onCapture, onError }: CameraCaptureProps) {
                     <button
                         onClick={handleCapture}
                         disabled={isProcessing}
-                        className="group relative"
+                        className="relative group -mt-12"
                     >
-                        <div className="w-20 h-20 rounded-full bg-nature-400/20 border-4 border-nature-400 flex items-center justify-center transition-transform group-active:scale-95">
-                            <div className="w-16 h-16 rounded-full bg-nature-400 flex items-center justify-center shadow-lg shadow-nature-400/40">
-                                <Camera size={32} className="text-nature-900" />
+                        <div className="absolute inset-0 bg-nature-400 rounded-full blur-xl opacity-20 group-hover:opacity-40 transition-opacity" />
+                        <div className="w-24 h-24 rounded-full border-4 border-nature-950 bg-nature-800 flex items-center justify-center relative p-1">
+                            <div className="w-full h-full rounded-full border-2 border-nature-500/30 flex items-center justify-center group-active:scale-95 transition-transform duration-200 bg-gradient-to-tr from-nature-600 to-nature-400">
+                                <Camera size={36} className="text-white drop-shadow-md" />
                             </div>
                         </div>
                     </button>
 
                     {/* History Button (Placeholder) */}
                     <button
-                        className="flex flex-col items-center gap-2 text-nature-200 hover:text-nature-400 transition-colors"
+                        className="flex flex-col items-center gap-2 group"
                     >
-                        <div className="w-12 h-12 rounded-full bg-nature-800 border border-nature-600 flex items-center justify-center">
-                            <Leaf size={24} />
+                        <div className="w-14 h-14 rounded-2xl bg-nature-900/80 border border-nature-700/50 flex items-center justify-center group-active:scale-95 transition-all duration-200 hover:bg-nature-800 hover:border-nature-500/50">
+                            <Leaf size={24} className="text-nature-200 group-hover:text-nature-100" />
                         </div>
-                        <span className="text-sm font-medium">Details</span>
+                        <span className="text-xs font-medium text-nature-400/60 group-hover:text-nature-300 transition-colors">Details</span>
                     </button>
                 </div>
             </div>
+
+            <style>{`
+                @keyframes scan {
+                    0%, 100% { transform: translateY(-140px); opacity: 0; }
+                    10% { opacity: 1; }
+                    50% { transform: translateY(140px); opacity: 1; }
+                    90% { opacity: 1; }
+                }
+            `}</style>
         </div>
     );
 }
