@@ -1,9 +1,9 @@
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Camera, Upload, Leaf, ScanLine, Shield } from 'lucide-react';
-import { classifyImage, calibrateHealthyLeaf, type PredictionResult } from '../services/classifier';
+import { classifyImage } from '../services/classifier';
 
 interface CameraCaptureProps {
-    onCapture: (imageUri: string, result: PredictionResult) => void;
+    onCapture: (imageUri: string, result: any) => void;
     onError: (error: string) => void;
 }
 
@@ -14,52 +14,33 @@ export function CameraCapture({ onCapture, onError }: CameraCaptureProps) {
     // const [isStreaming, setIsStreaming] = useState(false); // Unused
     const [isProcessing, setIsProcessing] = useState(false);
 
-    const waitForVideoReady = useCallback((video: HTMLVideoElement) => {
-        return new Promise<void>((resolve, reject) => {
-            if (video.readyState >= 2 && video.videoWidth > 0 && video.videoHeight > 0) {
-                resolve();
-                return;
-            }
-            const onLoaded = () => {
-                resolve();
-            };
-            const onError = () => {
-                reject(new Error('Camera not ready'));
-            };
-            video.addEventListener('loadedmetadata', onLoaded, { once: true });
-            video.addEventListener('error', onError, { once: true });
-        });
+    useEffect(() => {
+        startCamera();
+        return () => stopCamera();
     }, []);
 
-
-    const startCamera = useCallback(async () => {
+    const startCamera = async () => {
         try {
             const stream = await navigator.mediaDevices.getUserMedia({
                 video: { facingMode: 'environment' }
             });
             if (videoRef.current) {
                 videoRef.current.srcObject = stream;
-                try { await videoRef.current.play(); } catch { void 0; }
                 // setIsStreaming(true);
             }
         } catch (err) {
             console.error('Camera error:', err);
             onError('Could not access camera. Please allow permissions or use upload.');
         }
-    }, [onError]);
+    };
 
-    const stopCamera = useCallback(() => {
+    const stopCamera = () => {
         if (videoRef.current && videoRef.current.srcObject) {
             const stream = videoRef.current.srcObject as MediaStream;
             stream.getTracks().forEach(track => track.stop());
             // setIsStreaming(false);
         }
-    }, []);
-
-    useEffect(() => {
-        startCamera();
-        return () => stopCamera();
-    }, [startCamera, stopCamera]);
+    };
 
     const handleCapture = async () => {
         if (!videoRef.current || !canvasRef.current || isProcessing) return;
@@ -68,9 +49,6 @@ export function CameraCapture({ onCapture, onError }: CameraCaptureProps) {
         try {
             const video = videoRef.current;
             const canvas = canvasRef.current;
-            if (video.videoWidth === 0 || video.videoHeight === 0) {
-                await waitForVideoReady(video);
-            }
 
             // Set canvas dimensions to match video
             canvas.width = video.videoWidth;
@@ -78,16 +56,17 @@ export function CameraCapture({ onCapture, onError }: CameraCaptureProps) {
 
             // Draw video frame to canvas
             const ctx = canvas.getContext('2d');
-            if (!ctx) throw new Error('Canvas context not available');
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            if (ctx) {
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-            // Get data URL for display/storage
-            const imageUri = canvas.toDataURL('image/jpeg');
+                // Get data URL for display/storage
+                const imageUri = canvas.toDataURL('image/jpeg');
 
-            // Run classification directly on the canvas element
-            const result = await classifyImage(canvas);
+                // Run classification directly on the canvas element
+                const result = await classifyImage(canvas);
 
-            onCapture(imageUri, result);
+                onCapture(imageUri, result);
+            }
         } catch (err) {
             console.error('Capture error:', err);
             onError('Failed to capture and analyze image.');
@@ -118,7 +97,7 @@ export function CameraCapture({ onCapture, onError }: CameraCaptureProps) {
                         const result = await classifyImage(canvas);
                         onCapture(img.src, result);
                     }
-                } catch {
+                } catch (err) {
                     onError('Failed to analyze uploaded image.');
                 } finally {
                     setIsProcessing(false);
@@ -128,26 +107,6 @@ export function CameraCapture({ onCapture, onError }: CameraCaptureProps) {
         };
 
         reader.readAsDataURL(file);
-    };
-
-    const handleCalibrate = async () => {
-        if (!videoRef.current || !canvasRef.current || isProcessing) return;
-        setIsProcessing(true);
-        try {
-            const video = videoRef.current;
-            const canvas = canvasRef.current;
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            const ctx = canvas.getContext('2d');
-            if (ctx) {
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                calibrateHealthyLeaf(canvas);
-            }
-        } catch {
-            onError('Calibration failed.');
-        } finally {
-            setIsProcessing(false);
-        }
     };
 
     return (
@@ -242,16 +201,14 @@ export function CameraCapture({ onCapture, onError }: CameraCaptureProps) {
                         </div>
                     </button>
 
-                    {/* Calibrate Button */}
+                    {/* History Button (Placeholder) */}
                     <button
-                        onClick={handleCalibrate}
-                        disabled={isProcessing}
                         className="flex flex-col items-center gap-2 group"
                     >
                         <div className="w-14 h-14 rounded-2xl bg-nature-900/80 border border-nature-700/50 flex items-center justify-center group-active:scale-95 transition-all duration-200 hover:bg-nature-800 hover:border-nature-500/50">
                             <Leaf size={24} className="text-nature-200 group-hover:text-nature-100" />
                         </div>
-                        <span className="text-xs font-medium text-nature-400/60 group-hover:text-nature-300 transition-colors">Calibrate</span>
+                        <span className="text-xs font-medium text-nature-400/60 group-hover:text-nature-300 transition-colors">Details</span>
                     </button>
                 </div>
             </div>
