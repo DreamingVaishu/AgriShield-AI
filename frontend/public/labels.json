@@ -119,6 +119,166 @@
             "treatment": "No treatment needed. Continue monitoring.",
             "treatmentHindi": "कोई उपचार की आवश्यकता नहीं। निगरानी जारी रखें।",
             "treatmentMarathi": "उपचाराची गरज नाही. देखरेख चालू ठेवा."
+        },
+        {
+            "id": 12,
+            "name": "Pepper Bell Bacterial Spot",
+            "nameHindi": "शिमला मिर्च बैक्टीरियल धब्बा",
+            "nameMarathi": "शिमला मिरची जिवाणू ठिपके",
+            "severity": "medium",
+            "treatment": "Remove infected leaves. Apply copper-based bactericide. Avoid leaf wetness.",
+            "treatmentHindi": "संक्रमित पत्तियाँ हटाएँ। तांबा आधारित जीवाणुनाशक लगाएँ। पत्तों को भीगने से बचाएँ।",
+            "treatmentMarathi": "संक्रमित पाने काढा. तांबेवर आधारित जीवाणुनाशक वापरा. पाने ओलसर राहू देऊ नका."
+        },
+        {
+            "id": 13,
+            "name": "Pepper Bell Healthy",
+            "nameHindi": "स्वस्थ शिमला मिर्च",
+            "nameMarathi": "निरोगी शिमला मिरची",
+            "severity": "none",
+            "treatment": "No treatment needed.",
+            "treatmentHindi": "उपचार की आवश्यकता नहीं।",
+            "treatmentMarathi": "उपचाराची गरज नाही."
+        },
+        {
+            "id": 14,
+            "name": "Corn Common Rust",
+            "nameHindi": "मक्का सामान्य जंग",
+            "nameMarathi": "मका सामान्य गंज",
+            "severity": "medium",
+            "treatment": "Apply triazole fungicides. Use resistant hybrids. Remove severely infected plants.",
+            "treatmentHindi": "ट्रायजोल फफूंदनाशक लगाएँ। प्रतिरोधी किस्में अपनाएँ। अत्यधिक संक्रमित पौधों को हटाएँ।",
+            "treatmentMarathi": "ट्रायाझोल बुरशीनाशक वापरा. प्रतिरोधक जाती वापरा. अत्यंत संक्रमित झाडे काढा."
+        },
+        {
+            "id": 15,
+            "name": "Corn Northern Leaf Blight",
+            "nameHindi": "मक्का उत्तरी पत्ती झुलसा",
+            "nameMarathi": "मका उत्तर पान अनिष्ट",
+            "severity": "high",
+            "treatment": "Apply fungicide at early symptoms. Improve airflow. Practice crop rotation.",
+            "treatmentHindi": "लक्षणों के प्रारंभ में फफूंदनाशक लगाएँ। हवा का संचार बढ़ाएँ। फसल चक्र अपनाएँ।",
+            "treatmentMarathi": "लक्षण दिसताच बुरशीनाशक वापरा. हवेचा प्रवाह सुधारावा. पीक आलटून पालटून करा."
+        },
+        {
+            "id": 16,
+            "name": "Corn Healthy",
+            "nameHindi": "स्वस्थ मक्का",
+            "nameMarathi": "निरोगी मका",
+            "severity": "none",
+            "treatment": "No treatment needed.",
+            "treatmentHindi": "उपचार की आवश्यकता नहीं।",
+            "treatmentMarathi": "उपचाराची गरज नाही."
+        },
+        {
+            "id": 17,
+            "name": "Grape Black Rot",
+            "nameHindi": "अंगूर काला सड़न",
+            "nameMarathi": "द्राक्ष काळा कुजणे",
+            "severity": "high",
+            "treatment": "Prune and destroy infected clusters. Apply fungicide during wet periods.",
+            "treatmentHindi": "संक्रमित गुच्छों को काटकर नष्ट करें। बारिश/नमी में फफूंदनाशक लगाएँ।",
+            "treatmentMarathi": "संक्रमित घोसले छाटून नष्ट करा. पावसाळ्यात/ओलाव्यात बुरशीनाशक वापरा."
+        },
+        {
+            "id": 18,
+            "name": "Grape Healthy",
+            "nameHindi": "स्वस्थ अंगूर",
+            "nameMarathi": "निरोगी द्राक्ष",
+            "severity": "none",
+            "treatment": "No treatment needed.",
+            "treatmentHindi": "उपचार की आवश्यकता नहीं।",
+            "treatmentMarathi": "उपचाराची गरज नाही."
+        },
+        {
+            "id": 19,
+            "name": "Strawberry Leaf Scorch",
+            "nameHindi": "स्ट्रॉबेरी पत्ती जलन",
+            "nameMarathi": "स्ट्रॉबेरी पान जळजळ",
+            "severity": "medium",
+            "treatment": "Remove infected leaves. Improve ventilation. Avoid overhead watering.",
+            "treatmentHindi": "संक्रमित पत्तियाँ हटाएँ। हवा का संचार बढ़ाएँ। ऊपर से पानी देने से बचें।",
+            "treatmentMarathi": "संक्रमित पाने काढा. हवेचा प्रवाह सुधारावा. वरून पाणी देणे टाळा."
+        },
+        {
+            "id": 20,
+            "name": "Strawberry Healthy",
+            "nameHindi": "स्वस्थ स्ट्रॉबेरी",
+            "nameMarathi": "निरोगी स्ट्रॉबेरी",
+            "severity": "none",
+            "treatment": "No treatment needed.",
+            "treatmentHindi": "उपचार की आवश्यकता नहीं।",
+            "treatmentMarathi": "उपचाराची गरज नाही."
+        },
+        {
+            "id": 21,
+            "name": "Squash Powdery Mildew",
+            "nameHindi": "लोकी/कदू चूर्णी फफूंद",
+            "nameMarathi": "दोडका/भोपळा भुकटी बुरशी",
+            "severity": "medium",
+            "treatment": "Apply sulfur or potassium bicarbonate. Remove severely infected leaves.",
+            "treatmentHindi": "गंधक या पोटैशियम बाइकार्बोनेट लगाएँ। अत्यधिक संक्रमित पत्तियाँ हटाएँ।",
+            "treatmentMarathi": "सल्फर किंवा पोटॅशियम बायकार्बोनेट वापरा. अतिशय संक्रमित पाने काढा."
+        },
+        {
+            "id": 22,
+            "name": "Soybean Healthy",
+            "nameHindi": "स्वस्थ सोयाबीन",
+            "nameMarathi": "निरोगी सोयाबीन",
+            "severity": "none",
+            "treatment": "No treatment needed.",
+            "treatmentHindi": "उपचार की आवश्यकता नहीं।",
+            "treatmentMarathi": "उपचाराची गरज नाही."
+        },
+        {
+            "id": 23,
+            "name": "Blueberry Healthy",
+            "nameHindi": "स्वस्थ ब्लूबेरी",
+            "nameMarathi": "निरोगी ब्लूबेरी",
+            "severity": "none",
+            "treatment": "No treatment needed.",
+            "treatmentHindi": "उपचार की आवश्यकता नहीं।",
+            "treatmentMarathi": "उपचाराची गरज नाही."
+        },
+        {
+            "id": 24,
+            "name": "Cherry Powdery Mildew",
+            "nameHindi": "चेरी चूर्णी फफूंद",
+            "nameMarathi": "चेरी भुकटी बुरशी",
+            "severity": "medium",
+            "treatment": "Apply fungicide. Improve airflow. Prune dense canopy.",
+            "treatmentHindi": "फफूंदनाशक लगाएँ। हवा का संचार सुधारें। घने छत्रक को छाँटें।",
+            "treatmentMarathi": "बुरशीनाशक वापरा. हवेचा प्रवाह सुधारावा. दाट पर्णसंभार छाटावा."
+        },
+        {
+            "id": 25,
+            "name": "Cherry Healthy",
+            "nameHindi": "स्वस्थ चेरी",
+            "nameMarathi": "निरोगी चेरी",
+            "severity": "none",
+            "treatment": "No treatment needed.",
+            "treatmentHindi": "उपचार की आवश्यकता नहीं।",
+            "treatmentMarathi": "उपचाराची गरज नाही."
+        },
+        {
+            "id": 26,
+            "name": "Peach Bacterial Spot",
+            "nameHindi": "आड़ू बैक्टीरियल धब्बा",
+            "nameMarathi": "पीच जिवाणू ठिपके",
+            "severity": "medium",
+            "treatment": "Apply copper sprays. Remove infected fruit and leaves. Improve sanitation.",
+            "treatmentHindi": "तांबे के स्प्रे लगाएँ। संक्रमित फल/पत्तियाँ हटाएँ। सफाई सुधारें।",
+            "treatmentMarathi": "तांब्याचे फवारणी करा. संक्रमित फळे/पाने काढा. स्वच्छता सुधारावी."
+        },
+        {
+            "id": 27,
+            "name": "Peach Healthy",
+            "nameHindi": "स्वस्थ आड़ू",
+            "nameMarathi": "निरोगी पीच",
+            "severity": "none",
+            "treatment": "No treatment needed.",
+            "treatmentHindi": "उपचार की आवश्यकता नहीं।",
+            "treatmentMarathi": "उपचाराची गरज नाही."
         }
     ],
     "severityColors": {
